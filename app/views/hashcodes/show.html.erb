@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Hash:</b>
+  <%= @hashcode.hash %>
+</p>
+
+<p>
+  <b>Pin:</b>
+  <%= @hashcode.pin %>
+</p>
+
+
+<%= link_to 'Edit', edit_hashcode_path(@hashcode) %> |
+<%= link_to 'Back', hashcodes_path %>

@@ -1,0 +1,25 @@
+<%= form_for(@hashcode) do |f| %>
+  <% if @hashcode.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@hashcode.errors.count, "error") %> prohibited this hashcode from being saved:</h2>
+
+      <ul>
+      <% @hashcode.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :hash %><br />
+    <%= f.text_field :hash %>
+  </div>
+  <div class="field">
+    <%= f.label :pin %><br />
+    <%= f.text_field :pin %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  emai: MyString
+  password_hash: MyString
+
+two:
+  emai: MyString
+  password_hash: MyString
