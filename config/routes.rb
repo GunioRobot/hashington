@@ -59,4 +59,5 @@ Hashington::Application.routes.draw do
   # match ':controller(/:action(/:id(.:format)))'
   match 'login' => 'authentication#login'
   match 'logout' => 'authentication#logout'
+  match 'register' => 'authentication#register'
 end

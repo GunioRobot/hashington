@@ -2,8 +2,6 @@ class AuthenticationController < ApplicationController
 	def login
 		@user = User.authenticate(params[:email], params[:password])
 		
-		logger.debug @user
-		
 		unless @user.nil?
 			redirect_to hashcodes_path
 		end
@@ -15,5 +13,9 @@ class AuthenticationController < ApplicationController
 		else
 			#raise something
 		end
+	end
+	
+	def register
+		
 	end
 end

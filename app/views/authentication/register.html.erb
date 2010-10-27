@@ -1,0 +1,12 @@
+<h1>Register</h1>
+
+
+<% form_tag('/register', :method => 'post') do %>
+	<div class="email"><%= label_tag :username, "Email:" %> <%= email_field_tag :username %></div>
+	<div class="password"><%= label_tag :password, "Password:" %> <%= password_field_tag :password %></div>
+	<div class="confirm-password"><%= label_tag :confirmPassword, "Confirm Password:" %> <%= password_field_tag :confirmPassword %></div>
+	
+	<div class="buttons">
+		<%= submit_tag 'Register' %> <%= link_to 'Cancel', root_path %>
+	</div>
+<% end %>
