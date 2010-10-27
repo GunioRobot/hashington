@@ -4,10 +4,10 @@ class HashcodesController < ApplicationController
   # GET /hashcodes
   # GET /hashcodes.xml
   def index
-    @hashcodes = @user.hashcodes
+    @hashcodes = @current_user.hashcodes
 
     respond_to do |format|
-      #format.html # index.html.erb
+      format.html # index.html.erb
       format.xml  { render :xml => @hashcodes }
     end
   end
@@ -26,7 +26,7 @@ class HashcodesController < ApplicationController
   # GET /hashcodes/new
   # GET /hashcodes/new.xml
   def new
-    @hashcode = Hashcode.new
+    @hashcode = @current_user.hashcodes.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,7 +42,7 @@ class HashcodesController < ApplicationController
   # POST /hashcodes
   # POST /hashcodes.xml
   def create
-    @hashcode = Hashcode.new(params[:hashcode])
+    @hashcode = @current_user.hashcodes.new(params[:hashcode])
 
     respond_to do |format|
       if @hashcode.save
