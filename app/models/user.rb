@@ -1,6 +1,10 @@
 class User < ActiveRecord::Base
 	has_many :hashcodes
 	
+	before_save do
+		self.password_hash = Digest::SHA256.hexdigest(password_hash)
+	end
+	
 	validates_presence_of :email
 	validates_presence_of :password_hash
 	validates_confirmation_of :password_hash

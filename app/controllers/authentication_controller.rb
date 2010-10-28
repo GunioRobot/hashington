@@ -1,6 +1,5 @@
 class AuthenticationController < ApplicationController
 	def login
-		#logger.debug "Password: " + params[:password]
 		@user = User.authenticate_without_password_hash(params[:username], params[:password])
 		
 		unless @user.nil?
@@ -21,9 +20,9 @@ class AuthenticationController < ApplicationController
 	end
 	
 	def register
-		@user = User.new(params)
+		@user = User.new(params[:user])
 		
-		if @user.valid? and @user.save!
+		if @user.valid? and @user.save
 			session[:user_id] = @user.id
 			
 			redirect_to root_path
