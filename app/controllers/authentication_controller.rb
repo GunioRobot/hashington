@@ -10,7 +10,7 @@ class AuthenticationController < ApplicationController
 	end
 	
 	def logout
-		if @user
+		unless @current_user.nil?
 			session[:user_id] = nil
 			
 			redirect_to root_path
@@ -20,9 +20,11 @@ class AuthenticationController < ApplicationController
 	end
 	
 	def register
-		@user = User.new(params[:user])
+		if request.post?
+			@user = User.new(params[:user])
+		end
 		
-		if @user.valid? and @user.save
+		if not @user.nil? and (@user.valid? and @user.save)
 			session[:user_id] = @user.id
 			
 			redirect_to root_path

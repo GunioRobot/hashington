@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Hashington</title>
-  <% if @user %>
+  <% if is_logged_in? %>
 	<%= link_to 'Logout', '/logout' %>
   <% else %>
 	<%= link_to 'Login', '/login' %>

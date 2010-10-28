@@ -1,10 +1,17 @@
 <h1>Register</h1>
 
+<% unless not @user.nil? and @user.errors.empty? %>
+<ul class="errors">
+	<% @user.errors.each do |msg| %>
+		<li><%= msg %></li>
+	<% end %>
+</ul>
+<% end %>
 
 <% form_tag('/register', :method => 'post') do %>
 	<div class="email"><%= label_tag :username, "Email:" %> <%= email_field_tag :username %></div>
-	<div class="password"><%= label_tag :password_hash, "Password:" %> <%= password_field_tag :password %></div>
-	<div class="confirm-password"><%= label_tag :password_hash_confirmation, "Confirm Password:" %> <%= password_field_tag :password_hash_confirmation %></div>
+	<div class="password"><%= label_tag :password, "Password:" %> <%= password_field_tag :password %></div>
+	<div class="confirm-password"><%= label_tag :password_confirmation, "Confirm Password:" %> <%= password_field_tag :password_hash_confirmation %></div>
 	
 	<div class="buttons">
 		<%= submit_tag 'Register' %> <%= link_to 'Cancel', root_path %>
