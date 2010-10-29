@@ -45,7 +45,7 @@ class HashcodesController < ApplicationController
 	if params[:email].nil?
 		@user = @current_user
 	else
-		@user = User.find(:email => params[:email]).first
+		@user = User.find_by_email(params[:email])
 		
 		# Create a new user with this email address...if one hasn't be found of course.
 		if @user.nil? 
@@ -55,7 +55,7 @@ class HashcodesController < ApplicationController
 	end
 	
 	# Need to generate a new hash code.	
-	@hashcode = @user.hashcodes.new(:hash => generate_hash, :initial_value => 0.0, :current_value => 0.0)
+	@hashcode = @user.hashcodes.new(:hash => generate_hash, :initial_value => params[:inital_value], :current_value => params[:initial_value])
 
     respond_to do |format|
       if @hashcode.save
