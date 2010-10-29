@@ -5,11 +5,11 @@ class User < ActiveRecord::Base
 		self.password_hash = Digest::SHA256.hexdigest(password_hash)
 	end
 	
-	validates_presence_of :email
-	validates_presence_of :password_hash
-	validates_confirmation_of :password_hash
-	validates_format_of :email, :with => /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/
-	validates_uniqueness_of :email, :scope => :id, :case_sensitive => false
+	validates_presence_of :email, :message => 'Please provide an email address.'
+	validates_presence_of :password_hash, :message => 'Please provide a password.'
+	validates_confirmation_of :password_hash, :message => 'Passwords do not match.'
+	validates_format_of :email, :with => /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/, :message => 'That is not an email address!'
+	validates_uniqueness_of :email, :case_sensitive => false, :message => 'There is already an account with that email address.'
 	
 	def self.authenticate_without_password_hash(username, password)
 		if password.nil? or password.empty?

@@ -5,7 +5,7 @@ class AuthenticationController < ApplicationController
 		unless @user.nil?
 			session[:user_id] = @user.id
 			
-			redirect_to hashcodes_path
+			redirect_to root_path
 		end
 	end
 	
@@ -21,13 +21,13 @@ class AuthenticationController < ApplicationController
 	
 	def register
 		if request.post?
-			@user = User.new(params[:user])
-		end
+			@user = User.new(:email => params[:username], :password_hash => params[:password], :password_hash_confirmation => params[:password_confirmation])
 		
-		if not @user.nil? and (@user.valid? and @user.save)
-			session[:user_id] = @user.id
-			
-			redirect_to root_path
+			if @user.valid? and @user.save
+				session[:user_id] = @user.id
+				
+				redirect_to root_path
+			end
 		end
 	end
 end

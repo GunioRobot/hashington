@@ -1,1 +1,26 @@
-<h1>This is a test.</h1>
+<% unless is_logged_in? %>
+	<h2>Please log in to do something!</h2>
+<% else %>
+	<h2>Your Hash Codes</h2>
+	
+	<table>
+		<tr>
+			<th>Code</th>
+			<th>Current Value</th>
+		</tr>
+		
+	<% unless @current_user.hashcodes.empty? %>
+		<% @current_user.hashcodes.each do |code| %>
+		<tr>
+			<td><%= code.hash %></td>
+			<td><%= code.current_value %></td>
+		</tr>
+		<% end %>
+	<% else %>
+		<tr>
+			<td colspan="2">How sad, you don't have any hash codes.</td>
+		</tr>
+	<% end %>
+	
+	</table>
+<% end %>
