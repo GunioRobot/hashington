@@ -23,18 +23,4 @@
 	<% end %>
 	
 	</table>
-	
-	<h2>Add a Hash Code</h2>
-	
-	<div class="new-hashcode">
-	<%= form_tag hashcodes_path do %>
-		<%= label_tag :email, 'Email:' %> <%= text_field_tag :email %>
-		
-		<%= label_tag :initial_amount, 'Initial Amount:' %> <%= text_field_tag :initial_amount %>
-		
-		<div class="buttons">
-			<%= submit_tag 'Create New Hashcode' %>
-		</div>
-	<% end %>
-	</div>
 <% end %>
