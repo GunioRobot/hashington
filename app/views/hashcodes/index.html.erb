@@ -1,25 +1,40 @@
-<h1>Listing hashcodes</h1>
+<% unless is_logged_in? %>
+	<h2>Please log in to do something!</h2>
+<% else %>
+	<h2>Your Hash Codes</h2>
 
-<table>
-  <tr>
-    <th>Hash</th>
-    <th>Pin</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+	<table>
+		<tr>
+			<th>Code</th>
+			<th>Current Value</th>
+		</tr>
 
-<% @hashcodes.each do |hashcode| %>
-  <tr>
-    <td><%= hashcode.hash %></td>
-    <td><%= hashcode.pin %></td>
-    <td><%= link_to 'Show', hashcode %></td>
-    <td><%= link_to 'Edit', edit_hashcode_path(hashcode) %></td>
-    <td><%= link_to 'Destroy', hashcode, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+	<% unless @current_user.hashcodes.empty? %>
+		<% @current_user.hashcodes.each do |code| %>
+		<tr>
+			<td><%= code.hash %></td>
+			<td><%= code.current_value %></td>
+		</tr>
+		<% end %>
+	<% else %>
+		<tr>
+			<td colspan="2">How sad, you don't have any hash codes.</td>
+		</tr>
+	<% end %>
+
+	</table>
+
+	<h2>Add a Hash Code</h2>
+
+	<div class="new-hashcode">
+	<%= form_tag hashcodes_path do %>
+		<%= label_tag :email, 'Email:' %> <%= text_field_tag :email %>
+
+		<%= label_tag :initial_amount, 'Initial Amount:' %> <%= text_field_tag :initial_amount %>
+
+		<div class="buttons">
+			<%= submit_tag 'Create New Hashcode' %>
+		</div>
+	<% end %>
+	</div>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Hashcode', new_hashcode_path %>
