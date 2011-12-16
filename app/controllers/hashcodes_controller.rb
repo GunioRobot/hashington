@@ -1,6 +1,6 @@
 class HashcodesController < ApplicationController
   before_filter :ensure_login
-  
+
   # GET /hashcodes
   # GET /hashcodes.xml
   def index
@@ -46,15 +46,15 @@ class HashcodesController < ApplicationController
 		@user = @current_user
 	else
 		@user = User.find_by_email(params[:email])
-		
+
 		# Create a new user with this email address...if one hasn't be found of course.
-		if @user.nil? 
+		if @user.nil?
 			@user = User.new(:email => params[:email])
 			@user.save
 		end
 	end
-	
-	# Need to generate a new hash code.	
+
+	# Need to generate a new hash code.
 	@hashcode = @user.hashcodes.new(:hash => generate_hash, params[:inital_value], :current_value => params[:initial_value])
 
     respond_to do |format|
@@ -86,7 +86,7 @@ class HashcodesController < ApplicationController
 
   # DELETE /hashcodes/1
   # DELETE /hashcodes/1.xml
-  def destroy	
+  def destroy
     @hashcode = Hashcode.find(params[:id])
     @hashcode.destroy
 
@@ -100,16 +100,16 @@ class HashcodesController < ApplicationController
 		# pick two sets of 5 letters & numbers
 		a = ("a".."z").to_a
 		(0..9).each { |i| a << i }
-		
+
 		hash = ""
 		for i in (0..10)
 			hash << a.at(rand(a.length)).to_s
-			
+
 			if i == 5
 				hash << "-"
 			end
 		end
-				
+
 		if not Hashcode.find_by_hash(hash).nil?
 			return generate_hash
 		else
